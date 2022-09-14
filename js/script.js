@@ -2,7 +2,7 @@ const calculateExpense = () => {
   const income = document.getElementById("income").value;
 
   const food = document.getElementById("food").value;
-  food.value = '';
+
   const rent = document.getElementById("rent").value;
 
   const clothes = document.getElementById("clothes").value;
@@ -22,11 +22,11 @@ const calculateExpense = () => {
   }
   // calculate expense
   const expense =
-    parseInt(food) + parseInt(rent) + parseInt(clothes);
+    parseFloat(food) + parseFloat(rent) + parseFloat(clothes);
 
 
   // calculate balance
-  const balance = parseInt(income) - expense;
+  const balance = parseFloat(income) - expense;
   //   validate income
   if (expense > income.value) {
     alert("Expenses cannot be more than income");
@@ -40,16 +40,17 @@ const calculateExpense = () => {
 
 const calculateSavings = () => {
   // calculate saving amount
+  const income = document.getElementById("income").value
   const savePercentage = document.getElementById("save").value;
   //   Validate saving percentage value
   if (savePercentage < 0) {
     alert("Provide positive saving value");
   }
-  const savingAmount = (savePercentage / 100);
+  const savingAmount = (savePercentage / income) * 100;
 
   // calculate remaining balance
   const balance = document.getElementById("balance").innerText;
-  const balanceNumber = parseInt(balance)
+  const balanceNumber = parseFloat(balance)
   const remainingBalance = balanceNumber - savingAmount;
   console.log(remainingBalance)
 
@@ -58,8 +59,10 @@ const calculateSavings = () => {
     alert("SavingAmount is greater than balance");
   } else {
     // view saving amount and remaining balance
-    document.getElementById("saving-amount").innerText = savingAmount;
-    document.getElementById("remaining-balance").innerText = remainingBalance;
+    const a = document.getElementById("saving-amount")
+    a.innerText = parseFloat(savingAmount).toFixed(2)
+    const b = document.getElementById("remaining-balance")
+    b.innerText = parseFloat(remainingBalance).toFixed(2)
 
   }
 };
